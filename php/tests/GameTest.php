@@ -6,6 +6,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use TicTacToe\Game;
 use TicTacToe\Coordinates;
+use TicTacToe\Symbol;
 
 class GameTest extends TestCase
 {
@@ -25,7 +26,7 @@ class GameTest extends TestCase
     {
         $this->expectException(Exception::class);
 
-        $this->game->play('O', new Coordinates(0, 0));
+        $this->game->play(new Coordinates(0, 0), new Symbol('O'));
     }
 
     /**
@@ -36,9 +37,8 @@ class GameTest extends TestCase
     {
         $this->expectException(Exception::class);
 
-        $this->game->play('X', new Coordinates(0, 0));
-
-        $this->game->play('X', new Coordinates(1, 0));
+        $this->game->play(new Coordinates(0, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(1, 0), new Symbol('X'));
     }
 
     /**
@@ -49,9 +49,8 @@ class GameTest extends TestCase
     {
         $this->expectException(Exception::class);
 
-        $this->game->play('X', new Coordinates(0, 0));
-
-        $this->game->play('O', new Coordinates(0, 0));
+        $this->game->play(new Coordinates(0, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 0), new Symbol('O'));
     }
 
     /**
@@ -62,10 +61,9 @@ class GameTest extends TestCase
     {
         $this->expectException(Exception::class);
 
-        $this->game->play('X', new Coordinates(0, 0));
-        $this->game->play('O', new Coordinates(0, 0));
-       
-        $this->game->play('X', new Coordinates(0, 0));
+        $this->game->play(new Coordinates(0, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 0), new Symbol('O'));
+        $this->game->play(new Coordinates(0, 0), new Symbol('X'));
     }
 
     /**
@@ -74,11 +72,11 @@ class GameTest extends TestCase
      */
     public function DeclarePlayerXAsAWinnerIfThreeInTopRow(): void
     {
-        $this->game->play('X', new Coordinates(0, 0));
-        $this->game->play('O', new Coordinates(1, 0));
-        $this->game->play('X', new Coordinates(0, 1));
-        $this->game->play('O', new Coordinates(1, 1));
-        $this->game->play('X', new Coordinates(0, 2));
+        $this->game->play(new Coordinates(0, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(1, 0), new Symbol('O'));
+        $this->game->play(new Coordinates(0, 1), new Symbol('X'));
+        $this->game->play(new Coordinates(1, 1), new Symbol('O'));
+        $this->game->play(new Coordinates(0, 2), new Symbol('X'));
 
         $winner = $this->game->winner();
 
@@ -91,12 +89,12 @@ class GameTest extends TestCase
      */
     public function DeclarePlayerOAsAWinnerIfThreeInTopRow(): void
     {
-        $this->game->play('X', new Coordinates(2, 2));
-        $this->game->play('O', new Coordinates(0, 0));
-        $this->game->play('X', new Coordinates(1, 0));
-        $this->game->play('O', new Coordinates(0, 1));
-        $this->game->play('X', new Coordinates(1, 1));
-        $this->game->play('O', new Coordinates(0, 2));
+        $this->game->play(new Coordinates(2, 2), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 0), new Symbol('O'));
+        $this->game->play(new Coordinates(1, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 1), new Symbol('O'));
+        $this->game->play(new Coordinates(1, 1), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 2), new Symbol('O'));
 
         $winner = $this->game->winner();
 
@@ -109,11 +107,11 @@ class GameTest extends TestCase
      */
     public function DeclarePlayerXAsAWinnerIfThreeInMiddleRow(): void
     {
-        $this->game->play('X', new Coordinates(1, 0));
-        $this->game->play('O', new Coordinates(0, 0));
-        $this->game->play('X', new Coordinates(1, 1));
-        $this->game->play('O', new Coordinates(0, 1));
-        $this->game->play('X', new Coordinates(1, 2));
+        $this->game->play(new Coordinates(1, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 0), new Symbol('O'));
+        $this->game->play(new Coordinates(1, 1), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 1), new Symbol('O'));
+        $this->game->play(new Coordinates(1, 2), new Symbol('X'));
 
         $winner = $this->game->winner();
 
@@ -126,12 +124,12 @@ class GameTest extends TestCase
      */
     public function DeclarePlayerOAsAWinnerIfThreeInMiddleRow(): void
     {
-        $this->game->play('X', new Coordinates(0, 0));
-        $this->game->play('O', new Coordinates(1, 0));
-        $this->game->play('X', new Coordinates(2, 0));
-        $this->game->play('O', new Coordinates(1, 1));
-        $this->game->play('X', new Coordinates(2, 1));
-        $this->game->play('O', new Coordinates(1, 2));
+        $this->game->play(new Coordinates(0, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(1, 0), new Symbol('O'));
+        $this->game->play(new Coordinates(2, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(1, 1), new Symbol('O'));
+        $this->game->play(new Coordinates(2, 1), new Symbol('X'));
+        $this->game->play(new Coordinates(1, 2), new Symbol('O'));
 
         $winner = $this->game->winner();
 
@@ -144,11 +142,11 @@ class GameTest extends TestCase
      */
     public function DeclarePlayerXAsAWinnerIfThreeInBottomRow(): void
     {
-        $this->game->play('X', new Coordinates(2, 0));
-        $this->game->play('O', new Coordinates(0, 0));
-        $this->game->play('X', new Coordinates(2, 1));
-        $this->game->play('O', new Coordinates(0, 1));
-        $this->game->play('X', new Coordinates(2, 2));
+        $this->game->play(new Coordinates(2, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 0), new Symbol('O'));
+        $this->game->play(new Coordinates(2, 1), new Symbol('X'));
+        $this->game->play(new Coordinates(0, 1), new Symbol('O'));
+        $this->game->play(new Coordinates(2, 2), new Symbol('X'));
 
         $winner = $this->game->winner();
 
@@ -161,12 +159,12 @@ class GameTest extends TestCase
      */
     public function DeclarePlayerOAsAWinnerIfThreeInBottomRow(): void
     {
-        $this->game->play('X', new Coordinates(0, 0));
-        $this->game->play('O', new Coordinates(2, 0));
-        $this->game->play('X', new Coordinates(1, 0));
-        $this->game->play('O', new Coordinates(2, 1));
-        $this->game->play('X', new Coordinates(1, 1));
-        $this->game->play('O', new Coordinates(2, 2));
+        $this->game->play(new Coordinates(0, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(2, 0), new Symbol('O'));
+        $this->game->play(new Coordinates(1, 0), new Symbol('X'));
+        $this->game->play(new Coordinates(2, 1), new Symbol('O'));
+        $this->game->play(new Coordinates(1, 1), new Symbol('X'));
+        $this->game->play(new Coordinates(2, 2), new Symbol('O'));
 
         $winner = $this->game->winner();
 

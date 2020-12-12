@@ -20,27 +20,20 @@ class Game
     /**
      * @throws Exception
      */
-    public function play(string $symbol, Coordinates $coordinates): void
+    public function play(Coordinates $coordinates, Symbol $symbol = null): void
     {
-        //if first move
-        if ($this->_lastSymbol == ' ') {
-            //if player is X
-            if ($symbol == 'O') {
-                throw new Exception("Invalid first player");
-            }
+        if ($this->_lastSymbol == ' ' && $symbol->equals(new Symbol('O'))) {
+           throw new Exception("Invalid first player");
         }
-        //if not first move but player repeated
-        else if ($symbol == $this->_lastSymbol) {
+        if ($symbol->equals(new Symbol($this->_lastSymbol))) {
             throw new Exception("Invalid next player");
         }
-        //if not first move but play on an already played tile
-        else if ($this->_board->tileAt($coordinates)->symbol != ' ') {
+        if ($this->_board->tileAt($coordinates)->symbol != ' ') {
             throw new Exception("Invalid position");
         }
 
-        // update game state
-        $this->_lastSymbol = $symbol;
-        $this->_board->addTileAt($symbol, $coordinates);
+        $this->_lastSymbol = $symbol->value();
+        $this->_board->addTileAt($symbol->value(), $coordinates);
     }
 
     public function winner(): string

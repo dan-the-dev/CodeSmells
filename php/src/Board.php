@@ -23,7 +23,7 @@ class Board
     public function tileAt(Coordinates $coordinates): Tile
     {
         foreach ($this->plays as $t) {
-            if ($t->x == $coordinates->x() && $t->y == $coordinates->y()){
+            if ($coordinates->equals(new Coordinates($t->x, $t->y))) {
                 return $t;
             }
         }

@@ -21,4 +21,9 @@ class Coordinates {
     {
         return $this->y;
     }
+
+    public function equals(Coordinates $anotherCoordinates): bool
+    {
+        return $this->x === $anotherCoordinates->x && $this->y === $anotherCoordinates->y;
+    }
 }
