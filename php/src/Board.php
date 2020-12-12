@@ -10,6 +10,7 @@ class Board
     public function __construct()
     {
         for ($i = 0; $i < 3; $i++) {
+            /** @todo Extract method createtiles  */
             for ($j = 0; $j < 3; $j++) {
                 $tile = new Tile();
                 $tile->x = $i;
@@ -17,6 +18,7 @@ class Board
                 $tile->symbol = ' ';
                 $this->plays[] = $tile;
             }
+            /** end createtiles  */
         }
     }
 
@@ -37,6 +39,7 @@ class Board
         $newTile->y = $coordinates->y();
         $newTile->symbol = $symbol;
 
+        /** @todo use symbol->equals  */
         $this->tileAt($coordinates)->symbol = $symbol;
     }
 }

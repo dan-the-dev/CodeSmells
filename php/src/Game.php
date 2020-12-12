@@ -28,30 +28,39 @@ class Game
      */
     public function play(Coordinates $coordinates, Symbol $symbol = null): void
     {
+        /** @todo Extract method validate */
+        /** @todo Remove if/else */
         if ($this->_lastSymbol == null) {
+            /** @todo Extract method checkfirstplayer */
             if ($symbol->equals($this->_starting_symbol)) {
                throw new Exception("Invalid first player");
             }
+            /** end checkfirstplayer */
         } else {
+            /** @todo Extract method checknextplayer */
             if ($symbol->equals($this->_lastSymbol)) {
                 throw new Exception("Invalid next player");
             }
+            /** end checknextplayer */
         }
+        /** @todo Extract method checkposition */
+        /** @todo Remove message chain (maybe validposition should be in board?) */
         if ($this->_board->tileAt($coordinates)->symbol != ' ') {
             throw new Exception("Invalid position");
         }
+        /** end checkposition */
+        /** end validate */
 
         $this->_lastSymbol = $symbol;
+        /** @todo use Symbol class */
         $this->_board->addTileAt($symbol->value(), $coordinates);
     }
 
     public function winner(): string
     {
-        //if the positions in first row are taken
         if ($this->_board->tileAt(new Coordinates(0, 0))->symbol != ' ' &&
             $this->_board->tileAt(new Coordinates(0, 1))->symbol != ' ' &&
             $this->_board->tileAt(new Coordinates(0, 2))->symbol != ' ') {
-            //if first row is full with same symbol
             if ($this->_board->tileAt(new Coordinates(0, 0))->symbol ==
                 $this->_board->tileAt(new Coordinates(0, 1))->symbol &&
                 $this->_board->tileAt(new Coordinates(0, 2))->symbol == $this->_board->tileAt(new Coordinates(0, 1))->symbol) {
@@ -59,11 +68,9 @@ class Game
             }
         }
 
-        //if the positions in first row are taken
         if ($this->_board->tileAt(new Coordinates(1, 0))->symbol != ' ' &&
             $this->_board->tileAt(new Coordinates(1, 1))->symbol != ' ' &&
             $this->_board->tileAt(new Coordinates(1, 2))->symbol != ' ') {
-            //if middle row is full with same symbol
             if ($this->_board->tileAt(new Coordinates(1, 0))->symbol ==
                 $this->_board->tileAt(new Coordinates(1, 1))->symbol &&
                 $this->_board->tileAt(new Coordinates(1, 2))->symbol ==
@@ -72,11 +79,9 @@ class Game
             }
         }
 
-        //if the positions in first row are taken
         if ($this->_board->tileAt(new Coordinates(2, 0))->symbol != ' ' &&
             $this->_board->tileAt(new Coordinates(2, 1))->symbol != ' ' &&
             $this->_board->tileAt(new Coordinates(2, 2))->symbol != ' ') {
-            //if middle row is full with same symbol
             if ($this->_board->tileAt(new Coordinates(2, 0))->symbol ==
                 $this->_board->tileAt(new Coordinates(2, 1))->symbol &&
                 $this->_board->tileAt(new Coordinates(2, 2))->symbol ==
