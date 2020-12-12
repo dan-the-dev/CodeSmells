@@ -20,23 +20,23 @@ class Board
         }
     }
 
-    public function tileAt(int $x, int $y): Tile
+    public function tileAt(Coordinates $coordinates): Tile
     {
         foreach ($this->plays as $t) {
-            if ($t->x == $x && $t->y == $y){
+            if ($t->x == $coordinates->x() && $t->y == $coordinates->y()){
                 return $t;
             }
         }
         return null;
     }
 
-    public function addTileAt(string $symbol, int $x, int $y): void
+    public function addTileAt(string $symbol, Coordinates $coordinates): void
     {
         $newTile = new Tile();
-        $newTile->x = $x;
-        $newTile->y = $y;
+        $newTile->x = $coordinates->x();
+        $newTile->y = $coordinates->y();
         $newTile->symbol = $symbol;
 
-        $this->tileAt($x, $y)->symbol = $symbol;
+        $this->tileAt($coordinates)->symbol = $symbol;
     }
 }
