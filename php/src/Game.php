@@ -6,15 +6,21 @@ use Exception;
 
 class Game
 {
+    const O_PLAYER = 'O';
+    const X_PLAYER = 'X';
     /** @var string */
-    private $_lastSymbol = ' ';
+    private $_lastSymbol = null;
     
     /** @var Board */
     private $_board;
 
+    /** @var Symbol */
+    private $_starting_symbol;
+
     public function __construct()
     {
         $this->_board = new Board();
+        $this->_starting_symbol = new Symbol(self::O_PLAYER);
     }
 
     /**
@@ -22,17 +28,20 @@ class Game
      */
     public function play(Coordinates $coordinates, Symbol $symbol = null): void
     {
-        if ($this->_lastSymbol == ' ' && $symbol->equals(new Symbol('O'))) {
-           throw new Exception("Invalid first player");
-        }
-        if ($symbol->equals(new Symbol($this->_lastSymbol))) {
-            throw new Exception("Invalid next player");
+        if ($this->_lastSymbol == null) {
+            if ($symbol->equals($this->_starting_symbol)) {
+               throw new Exception("Invalid first player");
+            }
+        } else {
+            if ($symbol->equals($this->_lastSymbol)) {
+                throw new Exception("Invalid next player");
+            }
         }
         if ($this->_board->tileAt($coordinates)->symbol != ' ') {
             throw new Exception("Invalid position");
         }
 
-        $this->_lastSymbol = $symbol->value();
+        $this->_lastSymbol = $symbol;
         $this->_board->addTileAt($symbol->value(), $coordinates);
     }
 
