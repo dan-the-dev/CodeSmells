@@ -8,12 +8,6 @@ use TicTacToe\Symbol;
 /** @SMELL - Shotgun Surgery, inappropriate intimacy - This class expose public attributes instead of behaviours */
 class Tile
 {
-    /** @var int */
-    public $x;
-
-    /** @var int */
-    public $y;
-
     /** @var string */
     public $symbol;
 
@@ -25,10 +19,18 @@ class Tile
 
     public function __construct(Coordinates $coordinates = null, Symbol $symbol = null)
     {
-        $this->x = $coordinates->x();
-        $this->y = $coordinates->y();
         $this->symbol = $symbol->value();
         $this->coordinates = $coordinates;
         $this->symbols = $symbol;
+    }
+
+    public function coordinates(): Coordinates
+    {
+        return $this->coordinates;
+    }
+
+    public function coordinatesEqualsTo(Coordinates $coordinates): bool
+    {
+        return $this->coordinates->equalsTo($coordinates);
     }
 }

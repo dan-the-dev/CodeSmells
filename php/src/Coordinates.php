@@ -25,4 +25,14 @@ class Coordinates
     {
         return $this->y;
     }
+
+    public function equalsTo(Coordinates $anotherCoordinates): bool
+    {
+        return $this->x() === $anotherCoordinates->x() && $this->y() === $anotherCoordinates->y();
+    }
+
+    public function __toString(): string
+    {
+        return "x: {$this->x}; y:{$this->y}";
+    }
 }
