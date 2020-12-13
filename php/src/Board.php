@@ -30,6 +30,7 @@ class Board
         return null;
     }
 
+        /** @SMELL - Primitive Obsession - Should use objects */
     public function addTileAt(string $symbol, int $x, int $y): void
     {
         $newTile = new Tile();

@@ -20,6 +20,7 @@ class Game
     /**
      * @throws Exception
      */
+    /** @SMELL - Primitive Obsession - should use classes instead of primitives */
     public function play(string $symbol, int $x, int $y): void
     {
         //if first move
@@ -34,6 +35,7 @@ class Game
             throw new Exception("Invalid next player");
         }
         //if not first move but play on an already played tile
+        /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
         else if ($this->_board->tileAt($x, $y)->symbol != ' ') {
             throw new Exception("Invalid position");
         }
@@ -45,6 +47,7 @@ class Game
 
     public function winner(): string
     {
+        /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
         //if the positions in first row are taken
         if ($this->_board->tileAt(0, 0)->symbol != ' ' &&
             $this->_board->tileAt(0, 1)->symbol != ' ' &&
@@ -57,6 +60,7 @@ class Game
             }
         }
 
+        /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
         //if the positions in first row are taken
         if ($this->_board->tileAt(1, 0)->symbol != ' ' &&
             $this->_board->tileAt(1, 1)->symbol != ' ' &&
@@ -70,6 +74,7 @@ class Game
             }
         }
 
+        /** @SMELL - Message Chain - Board should expose a method symbolAtIsEquals(Tile $tile, Symbol $s) */
         //if the positions in first row are taken
         if ($this->_board->tileAt(2, 0)->symbol != ' ' &&
             $this->_board->tileAt(2, 1)->symbol != ' ' &&

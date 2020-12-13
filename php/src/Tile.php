@@ -2,6 +2,7 @@
 
 namespace TicTacToe;
 
+/** @SMELL - Shotgun Surgery, inappropriate intimacy - This class expose public attributes instead of behaviours */
 class Tile
 {
     /** @var int */
