@@ -10,7 +10,6 @@ class Board
     public function __construct()
     {
         for ($i = 0; $i < 3; $i++) {
-            /** @todo Extract method createtiles  */
             for ($j = 0; $j < 3; $j++) {
                 $tile = new Tile();
                 $tile->x = $i;
@@ -18,28 +17,26 @@ class Board
                 $tile->symbol = ' ';
                 $this->plays[] = $tile;
             }
-            /** end createtiles  */
         }
     }
 
-    public function tileAt(Coordinates $coordinates): Tile
+    public function tileAt(int $x, int $y): Tile
     {
         foreach ($this->plays as $t) {
-            if ($coordinates->equals(new Coordinates($t->x, $t->y))) {
+            if ($t->x == $x && $t->y == $y){
                 return $t;
             }
         }
         return null;
     }
 
-    public function addTileAt(string $symbol, Coordinates $coordinates): void
+    public function addTileAt(string $symbol, int $x, int $y): void
     {
         $newTile = new Tile();
-        $newTile->x = $coordinates->x();
-        $newTile->y = $coordinates->y();
+        $newTile->x = $x;
+        $newTile->y = $y;
         $newTile->symbol = $symbol;
 
-        /** @todo use symbol->equals  */
-        $this->tileAt($coordinates)->symbol = $symbol;
+        $this->tileAt($x, $y)->symbol = $symbol;
     }
 }
