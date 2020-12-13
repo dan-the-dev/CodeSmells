@@ -5,6 +5,8 @@ namespace TicTacToe;
 class Symbol
 {
     const EMPTY_VALUE = ' ';
+    const X_VALUE = 'X';
+    const O_VALUE = 'O';
 
     /** @var string */
     private $value;
@@ -22,6 +24,16 @@ class Symbol
     public function equalsTo(Symbol $anotherSymbol): bool
     {
         return $this->value() == $anotherSymbol->value();
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->value == self::EMPTY_VALUE;
+    }
+
+    public function isNotEmpty(): bool
+    {
+        return $this->value == self::X_VALUE || $this->value === self::O_VALUE;
     }
 
     public static function empty(): Symbol

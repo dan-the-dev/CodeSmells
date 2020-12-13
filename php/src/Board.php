@@ -34,4 +34,9 @@ class Board
         $newTile = new Tile(new Coordinates($x, $y), $symbols);
         $this->tileAt($x, $y)->putSymbol($symbols);
     }
+
+    public function tileAtCoordinatesIsNotEmpty(Coordinates $c): bool
+    {
+        return $this->tileAt($c->x(), $c->y())->symbol()->isNotEmpty();
+    }
 }

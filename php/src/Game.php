@@ -24,24 +24,18 @@ class Game
     /** @SMELL - Primitive Obsession - should use classes instead of primitives */
     public function play(string $symbol, int $x, int $y): void
     {
-        //if first move
-        if ($this->_lastSymbol->equalsTo(Symbol::empty())) {
-            //if player is X
-            if ($symbol == 'O') {
+        if ($this->_lastSymbol->isEmpty()) {
+            if ((new Symbol($symbol))->equalsTo(new Symbol('O'))) {
                 throw new Exception("Invalid first player");
             }
         }
-        //if not first move but player repeated
         else if ($this->_lastSymbol->equalsTo(new Symbol($symbol))) {
             throw new Exception("Invalid next player");
         }
-        //if not first move but play on an already played tile
-        /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
-        else if ($this->_board->tileAt($x, $y)->symbol != ' ') {
+        else if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates($x, $y))) {
             throw new Exception("Invalid position");
         }
 
-        // update game state
         $this->_board->addTileAt($x, $y, new Symbol($symbol));
         $this->_lastSymbol = new Symbol($symbol);
     }
