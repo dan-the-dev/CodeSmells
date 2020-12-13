@@ -11,7 +11,7 @@ class Board
     {
         for ($i = 0; $i < 3; $i++) {
             for ($j = 0; $j < 3; $j++) {
-                $tile = new Tile(new Coordinates($i, $j), new Symbol(' '));
+                $tile = new Tile(new Coordinates($i, $j), Symbol::empty());
                 $this->plays[] = $tile;
             }
         }

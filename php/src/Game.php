@@ -6,8 +6,8 @@ use Exception;
 
 class Game
 {
-    /** @var string */
-    private $_lastSymbol = ' ';
+    /** @var Symbol */
+    private $_lastSymbol = null;
     
     /** @var Board */
     private $_board;
@@ -15,6 +15,7 @@ class Game
     public function __construct()
     {
         $this->_board = new Board();
+        $this->_lastSymbol = Symbol::empty();
     }
 
     /**
@@ -24,14 +25,14 @@ class Game
     public function play(string $symbol, int $x, int $y): void
     {
         //if first move
-        if ($this->_lastSymbol == ' ') {
+        if ($this->_lastSymbol->equalsTo(Symbol::empty())) {
             //if player is X
             if ($symbol == 'O') {
                 throw new Exception("Invalid first player");
             }
         }
         //if not first move but player repeated
-        else if ($symbol == $this->_lastSymbol) {
+        else if ($this->_lastSymbol->equalsTo(new Symbol($symbol))) {
             throw new Exception("Invalid next player");
         }
         //if not first move but play on an already played tile
@@ -41,8 +42,8 @@ class Game
         }
 
         // update game state
-        $this->_lastSymbol = $symbol;
         $this->_board->addTileAt($x, $y, new Symbol($symbol));
+        $this->_lastSymbol = new Symbol($symbol);
     }
 
     public function winner(): string

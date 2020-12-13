@@ -4,6 +4,8 @@ namespace TicTacToe;
 
 class Symbol
 {
+    const EMPTY_VALUE = ' ';
+
     /** @var string */
     private $value;
 
@@ -17,4 +19,13 @@ class Symbol
         return $this->value;
     }
 
+    public function equalsTo(Symbol $anotherSymbol): bool
+    {
+        return $this->value() == $anotherSymbol->value();
+    }
+
+    public static function empty(): Symbol
+    {
+        return new Symbol(self::EMPTY_VALUE);
+    }
 }
