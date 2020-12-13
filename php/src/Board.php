@@ -39,4 +39,5 @@ class Board
     {
         return $this->tileAt($c->x(), $c->y())->symbol()->isNotEmpty();
     }
+
 }

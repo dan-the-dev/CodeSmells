@@ -43,7 +43,6 @@ class Game
     public function winner(): string
     {
         /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
-        //if the positions in first row are taken
         if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 0))  &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 1)) &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 2))) {
@@ -56,7 +55,6 @@ class Game
         }
 
         /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
-        //if the positions in first row are taken
         if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 0))  &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 1)) &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 2))) {
@@ -70,7 +68,6 @@ class Game
         }
 
         /** @SMELL - Message Chain - Board should expose a method symbolAtIsEquals(Tile $tile, Symbol $s) */
-        //if the positions in first row are taken
         if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 0))  &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 1)) &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 2))) {
@@ -85,4 +82,5 @@ class Game
 
         return ' ';
     }
+
 }
