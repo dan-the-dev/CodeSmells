@@ -44,9 +44,9 @@ class Game
     {
         /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
         //if the positions in first row are taken
-        if ($this->_board->tileAt(0, 0)->symbol != ' ' &&
-            $this->_board->tileAt(0, 1)->symbol != ' ' &&
-            $this->_board->tileAt(0, 2)->symbol != ' ') {
+        if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 0))  &&
+        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 1)) &&
+        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 2))) {
             //if first row is full with same symbol
             if ($this->_board->tileAt(0, 0)->symbol ==
                 $this->_board->tileAt(0, 1)->symbol &&
@@ -57,9 +57,9 @@ class Game
 
         /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
         //if the positions in first row are taken
-        if ($this->_board->tileAt(1, 0)->symbol != ' ' &&
-            $this->_board->tileAt(1, 1)->symbol != ' ' &&
-            $this->_board->tileAt(1, 2)->symbol != ' ') {
+        if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 0))  &&
+        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 1)) &&
+        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 2))) {
             //if middle row is full with same symbol
             if ($this->_board->tileAt(1, 0)->symbol ==
                 $this->_board->tileAt(1, 1)->symbol &&
@@ -71,9 +71,9 @@ class Game
 
         /** @SMELL - Message Chain - Board should expose a method symbolAtIsEquals(Tile $tile, Symbol $s) */
         //if the positions in first row are taken
-        if ($this->_board->tileAt(2, 0)->symbol != ' ' &&
-            $this->_board->tileAt(2, 1)->symbol != ' ' &&
-            $this->_board->tileAt(2, 2)->symbol != ' ') {
+        if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 0))  &&
+        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 1)) &&
+        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 2))) {
             //if middle row is full with same symbol
             if ($this->_board->tileAt(2, 0)->symbol ==
                 $this->_board->tileAt(2, 1)->symbol &&
