@@ -17,6 +17,7 @@ class Board
         }
     }
 
+        /** @SMELL - Primitive Obsession - Should use objects */
     public function tileAt(int $x, int $y): Tile
     {
         foreach ($this->plays as $t) {
@@ -28,9 +29,9 @@ class Board
     }
 
         /** @SMELL - Primitive Obsession - Should use objects */
-    public function addTileAt(string $symbol, int $x, int $y): void
+    public function addTileAt(int $x, int $y, Symbol $symbols = null): void
     {
-        $newTile = new Tile(new Coordinates($x, $y), new Symbol($symbol));
-        $this->tileAt($x, $y)->putSymbol(new Symbol($symbol));
+        $newTile = new Tile(new Coordinates($x, $y), $symbols);
+        $this->tileAt($x, $y)->putSymbol($symbols);
     }
 }

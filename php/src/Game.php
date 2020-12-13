@@ -42,7 +42,7 @@ class Game
 
         // update game state
         $this->_lastSymbol = $symbol;
-        $this->_board->addTileAt($symbol, $x, $y);
+        $this->_board->addTileAt($x, $y, new Symbol($symbol));
     }
 
     public function winner(): string
