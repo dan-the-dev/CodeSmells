@@ -31,6 +31,6 @@ class Board
     public function addTileAt(string $symbol, int $x, int $y): void
     {
         $newTile = new Tile(new Coordinates($x, $y), new Symbol($symbol));
-        $this->tileAt($x, $y)->symbol = $symbol;
+        $this->tileAt($x, $y)->putSymbol(new Symbol($symbol));
     }
 }

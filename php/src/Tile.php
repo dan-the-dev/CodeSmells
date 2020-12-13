@@ -29,8 +29,19 @@ class Tile
         return $this->coordinates;
     }
 
+    public function symbol(): Symbol
+    {
+        return $this->symbols;
+    }
+
     public function coordinatesEqualsTo(Coordinates $coordinates): bool
     {
         return $this->coordinates->equalsTo($coordinates);
+    }
+
+    public function putSymbol(Symbol $symbol): void
+    {
+        $this->symbol = $symbol->value();
+        $this->symbols = $symbol;
     }
 }
