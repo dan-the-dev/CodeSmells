@@ -11,10 +11,7 @@ class Board
     {
         for ($i = 0; $i < 3; $i++) {
             for ($j = 0; $j < 3; $j++) {
-                $tile = new Tile();
-                $tile->x = $i;
-                $tile->y = $j;
-                $tile->symbol = ' ';
+                $tile = new Tile(new Coordinates($i, $j), new Symbol(' '));
                 $this->plays[] = $tile;
             }
         }
@@ -33,11 +30,7 @@ class Board
         /** @SMELL - Primitive Obsession - Should use objects */
     public function addTileAt(string $symbol, int $x, int $y): void
     {
-        $newTile = new Tile();
-        $newTile->x = $x;
-        $newTile->y = $y;
-        $newTile->symbol = $symbol;
-
+        $newTile = new Tile(new Coordinates($x, $y), new Symbol($symbol));
         $this->tileAt($x, $y)->symbol = $symbol;
     }
 }
