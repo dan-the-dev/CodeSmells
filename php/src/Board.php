@@ -18,26 +18,25 @@ class Board
     }
 
         /** @SMELL - Primitive Obsession - Should use objects */
-    public function tileAt(int $x, int $y): Tile
+    public function tileAt(Coordinates $coordinates): Tile
     {
         foreach ($this->plays as $t) {
-            if ($t->coordinatesEqualsTo(new Coordinates($x, $y))){
+            if ($t->coordinatesEqualsTo($coordinates)){
                 return $t;
             }
         }
         return null;
     }
 
-        /** @SMELL - Primitive Obsession - Should use objects */
     public function addTileAt(Coordinates $coordinates, Symbol $symbols): void
     {
         $newTile = new Tile($coordinates, $symbols);
-        $this->tileAt($coordinates->x(), $coordinates->y())->putSymbol($symbols);
+        $this->tileAt($coordinates)->putSymbol($symbols);
     }
 
-    public function tileAtCoordinatesIsNotEmpty(Coordinates $c): bool
+    public function tileAtCoordinatesIsNotEmpty(Coordinates $coordinates): bool
     {
-        return $this->tileAt($c->x(), $c->y())->symbol()->isNotEmpty();
+        return $this->tileAt($coordinates)->symbol()->isNotEmpty();
     }
 
 }

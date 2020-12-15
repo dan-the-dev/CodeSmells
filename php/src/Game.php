@@ -47,10 +47,10 @@ class Game
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 1)) &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 2))) {
             //if first row is full with same symbol
-            if ($this->_board->tileAt(0, 0)->symbol ==
-                $this->_board->tileAt(0, 1)->symbol &&
-                $this->_board->tileAt(0, 2)->symbol == $this->_board->tileAt(0, 1)->symbol) {
-                return $this->_board->tileAt(0, 0)->symbol;
+            if ($this->_board->tileAt(new Coordinates(0, 0))->symbol ==
+                $this->_board->tileAt(new Coordinates(0, 1))->symbol &&
+                $this->_board->tileAt(new Coordinates(0, 2))->symbol == $this->_board->tileAt(new Coordinates(0, 1))->symbol) {
+                return $this->_board->tileAt(new Coordinates(0, 0))->symbol;
             }
         }
 
@@ -59,11 +59,11 @@ class Game
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 1)) &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 2))) {
             //if middle row is full with same symbol
-            if ($this->_board->tileAt(1, 0)->symbol ==
-                $this->_board->tileAt(1, 1)->symbol &&
-                $this->_board->tileAt(1, 2)->symbol ==
-                $this->_board->tileAt(1, 1)->symbol) {
-                return $this->_board->tileAt(1, 0)->symbol;
+            if ($this->_board->tileAt(new Coordinates(1, 0))->symbol ==
+                $this->_board->tileAt(new Coordinates(1, 1))->symbol &&
+                $this->_board->tileAt(new Coordinates(1, 2))->symbol ==
+                $this->_board->tileAt(new Coordinates(1, 1))->symbol) {
+                return $this->_board->tileAt(new Coordinates(1, 0))->symbol;
             }
         }
 
@@ -72,11 +72,11 @@ class Game
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 1)) &&
         $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 2))) {
             //if middle row is full with same symbol
-            if ($this->_board->tileAt(2, 0)->symbol ==
-                $this->_board->tileAt(2, 1)->symbol &&
-                $this->_board->tileAt(2, 2)->symbol ==
-                $this->_board->tileAt(2, 1)->symbol) {
-                return $this->_board->tileAt(2, 0)->symbol;
+            if ($this->_board->tileAt(new Coordinates(2, 0))->symbol ==
+                $this->_board->tileAt(new Coordinates(2, 1))->symbol &&
+                $this->_board->tileAt(new Coordinates(2, 2))->symbol ==
+                $this->_board->tileAt(new Coordinates(2, 1))->symbol) {
+                return $this->_board->tileAt(new Coordinates(2, 0))->symbol;
             }
         }
 
