@@ -26,18 +26,17 @@ class Game
     /** @SMELL - Primitive Obsession - should use classes instead of primitives */
     public function play(string $symbol, int $x, int $y): void
     {
+        $symbol = new Symbol($symbol);
         if ($this->_lastSymbol->isEmpty()) {
-            $this->checkFirstPlayer(new Symbol($symbol));
+            $this->checkFirstPlayer($symbol);
         }
-        else if ($this->_lastSymbol->equalsTo(new Symbol($symbol))) {
-            throw new Exception("Invalid next player");
-        }
-        else if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates($x, $y))) {
+        $this->checkSamePlayerAsLastPlay($symbol);
+        if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates($x, $y))) {
             throw new Exception("Invalid position");
         }
 
-        $this->_board->addTileAt(new Coordinates($x, $y), new Symbol($symbol));
-        $this->_lastSymbol = new Symbol($symbol);
+        $this->_board->addTileAt(new Coordinates($x, $y), $symbol);
+        $this->_lastSymbol = $symbol;
     }
 
     public function winner(): string
@@ -59,6 +58,13 @@ class Game
     {
         if ($symbol->notEqualsTo($this->_firstPlayer)) {
             throw new Exception("Invalid first player");
+        }
+    }
+
+    private function checkSamePlayerAsLastPlay(Symbol $symbol): void
+    {
+        if ($this->_lastSymbol->equalsTo($symbol)) {
+            throw new Exception("Invalid next player");
         }
     }
 
