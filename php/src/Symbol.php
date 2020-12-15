@@ -23,7 +23,12 @@ class Symbol
 
     public function equalsTo(Symbol $anotherSymbol): bool
     {
-        return $this->value() == $anotherSymbol->value();
+        return $this->value() === $anotherSymbol->value();
+    }
+
+    public function notEqualsTo(Symbol $anotherSymbol): bool
+    {
+        return $this->value() !== $anotherSymbol->value();
     }
 
     public function isEmpty(): bool
@@ -44,5 +49,10 @@ class Symbol
     public static function OSymbol(): Symbol
     {
         return new Symbol(self::O_VALUE);
+    }
+
+    public static function XSymbol(): Symbol
+    {
+        return new Symbol(self::X_VALUE);
     }
 }

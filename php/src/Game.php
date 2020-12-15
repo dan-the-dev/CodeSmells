@@ -8,6 +8,7 @@ class Game
 {
     /** @var Symbol */
     private $_lastSymbol = null;
+    private $_firstPlayer = null;
     
     /** @var Board */
     private $_board;
@@ -16,6 +17,7 @@ class Game
     {
         $this->_board = new Board();
         $this->_lastSymbol = Symbol::empty();
+        $this->_firstPlayer = Symbol::XSymbol();
     }
 
     /**
@@ -25,9 +27,7 @@ class Game
     public function play(string $symbol, int $x, int $y): void
     {
         if ($this->_lastSymbol->isEmpty()) {
-            if ((new Symbol($symbol))->equalsTo(Symbol::OSymbol())) {
-                throw new Exception("Invalid first player");
-            }
+            $this->checkFirstPlayer(new Symbol($symbol));
         }
         else if ($this->_lastSymbol->equalsTo(new Symbol($symbol))) {
             throw new Exception("Invalid next player");
@@ -53,6 +53,13 @@ class Game
         }
 
         return Symbol::EMPTY_VALUE;
+    }
+
+    private function checkFirstPlayer(Symbol $symbol): void
+    {
+        if ($symbol->notEqualsTo($this->_firstPlayer)) {
+            throw new Exception("Invalid first player");
+        }
     }
 
 }
