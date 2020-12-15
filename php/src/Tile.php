@@ -43,4 +43,14 @@ class Tile
         $this->symbol = $symbol->value();
         $this->symbols = $symbol;
     }
+
+    public function symbolIsNotEmpty(): bool
+    {
+        return $this->symbol()->isNotEmpty();
+    }
+
+    public function hasSameSymbol(Tile $anotherTile): bool
+    {
+        return $this->symbol()->equalsTo($anotherTile->symbol());
+    }
 }

@@ -25,7 +25,7 @@ class Game
     public function play(string $symbol, int $x, int $y): void
     {
         if ($this->_lastSymbol->isEmpty()) {
-            if ((new Symbol($symbol))->equalsTo(new Symbol('O'))) {
+            if ((new Symbol($symbol))->equalsTo(Symbol::OSymbol())) {
                 throw new Exception("Invalid first player");
             }
         }
@@ -42,45 +42,17 @@ class Game
 
     public function winner(): string
     {
-        /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
-        if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 0))  &&
-        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 1)) &&
-        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(0, 2))) {
-            //if first row is full with same symbol
-            if ($this->_board->tileAt(new Coordinates(0, 0))->symbol ==
-                $this->_board->tileAt(new Coordinates(0, 1))->symbol &&
-                $this->_board->tileAt(new Coordinates(0, 2))->symbol == $this->_board->tileAt(new Coordinates(0, 1))->symbol) {
-                return $this->_board->tileAt(new Coordinates(0, 0))->symbol;
-            }
+        if ($this->_board->rowTilesHasSameSymbolsNotEmpty(new Coordinates(0, 0))) {
+            return $this->_board->symbolAt(new Coordinates(0, 0))->value();
+        }
+        if ($this->_board->rowTilesHasSameSymbolsNotEmpty(new Coordinates(1, 0))) {
+            return $this->_board->symbolAt(new Coordinates(1, 0))->value();
+        }
+        if ($this->_board->rowTilesHasSameSymbolsNotEmpty(new Coordinates(2, 0))) {
+            return $this->_board->symbolAt(new Coordinates(2, 0))->value();
         }
 
-        /** @SMELL - Message Chain - Board should expose a method symbolAt(Tile $tile) */
-        if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 0))  &&
-        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 1)) &&
-        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(1, 2))) {
-            //if middle row is full with same symbol
-            if ($this->_board->tileAt(new Coordinates(1, 0))->symbol ==
-                $this->_board->tileAt(new Coordinates(1, 1))->symbol &&
-                $this->_board->tileAt(new Coordinates(1, 2))->symbol ==
-                $this->_board->tileAt(new Coordinates(1, 1))->symbol) {
-                return $this->_board->tileAt(new Coordinates(1, 0))->symbol;
-            }
-        }
-
-        /** @SMELL - Message Chain - Board should expose a method symbolAtIsEquals(Tile $tile, Symbol $s) */
-        if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 0))  &&
-        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 1)) &&
-        $this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates(2, 2))) {
-            //if middle row is full with same symbol
-            if ($this->_board->tileAt(new Coordinates(2, 0))->symbol ==
-                $this->_board->tileAt(new Coordinates(2, 1))->symbol &&
-                $this->_board->tileAt(new Coordinates(2, 2))->symbol ==
-                $this->_board->tileAt(new Coordinates(2, 1))->symbol) {
-                return $this->_board->tileAt(new Coordinates(2, 0))->symbol;
-            }
-        }
-
-        return ' ';
+        return Symbol::EMPTY_VALUE;
     }
 
 }

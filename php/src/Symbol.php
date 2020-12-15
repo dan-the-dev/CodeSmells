@@ -40,4 +40,9 @@ class Symbol
     {
         return new Symbol(self::EMPTY_VALUE);
     }
+
+    public static function OSymbol(): Symbol
+    {
+        return new Symbol(self::O_VALUE);
+    }
 }
