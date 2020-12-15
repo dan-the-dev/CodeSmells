@@ -36,7 +36,7 @@ class Game
             throw new Exception("Invalid position");
         }
 
-        $this->_board->addTileAt($x, $y, new Symbol($symbol));
+        $this->_board->addTileAt(new Coordinates($x, $y), new Symbol($symbol));
         $this->_lastSymbol = new Symbol($symbol);
     }
 

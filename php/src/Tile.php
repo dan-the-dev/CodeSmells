@@ -5,7 +5,6 @@ namespace TicTacToe;
 use TicTacToe\Coordinates;
 use TicTacToe\Symbol;
 
-/** @SMELL - Shotgun Surgery, inappropriate intimacy - This class expose public attributes instead of behaviours */
 class Tile
 {
     /** @var string */
@@ -17,7 +16,7 @@ class Tile
     /** @var Symbol */
     private $symbols;
 
-    public function __construct(Coordinates $coordinates = null, Symbol $symbol = null)
+    public function __construct(Coordinates $coordinates, Symbol $symbol)
     {
         $this->symbol = $symbol->value();
         $this->coordinates = $coordinates;

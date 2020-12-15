@@ -29,10 +29,10 @@ class Board
     }
 
         /** @SMELL - Primitive Obsession - Should use objects */
-    public function addTileAt(int $x, int $y, Symbol $symbols = null): void
+    public function addTileAt(Coordinates $coordinates, Symbol $symbols): void
     {
-        $newTile = new Tile(new Coordinates($x, $y), $symbols);
-        $this->tileAt($x, $y)->putSymbol($symbols);
+        $newTile = new Tile($coordinates, $symbols);
+        $this->tileAt($coordinates->x(), $coordinates->y())->putSymbol($symbols);
     }
 
     public function tileAtCoordinatesIsNotEmpty(Coordinates $c): bool
