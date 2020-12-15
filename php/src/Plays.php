@@ -16,9 +16,9 @@ class Plays
         return $this->collection;
     }
 
-    public function addTile(Tile $tile): bool
+    public function addTile(Tile $tile): void
     {
-        return array_push($this->collection, $tile);
+        array_push($this->collection, $tile);
     }
 
     public function tileAt(Coordinates $coordinates): ?Tile

@@ -32,19 +32,18 @@ class Game
         $this->_lastSymbol = $symbol;
     }
 
-    public function winner(): string
+    public function winner(): Symbol
     {
-        if ($this->_board->rowTilesHasSameSymbolsNotEmpty(new Coordinates(0, 0))) {
-            return $this->_board->symbolAt(new Coordinates(0, 0))->value();
-        }
-        if ($this->_board->rowTilesHasSameSymbolsNotEmpty(new Coordinates(1, 0))) {
-            return $this->_board->symbolAt(new Coordinates(1, 0))->value();
-        }
-        if ($this->_board->rowTilesHasSameSymbolsNotEmpty(new Coordinates(2, 0))) {
-            return $this->_board->symbolAt(new Coordinates(2, 0))->value();
-        }
+        $firstRowCoordinates = new Coordinates(0, 0);
+        $secondRowCoordinates = new Coordinates(1, 0);
+        $thirdRowCoordinates = new Coordinates(2, 0);
 
-        return Symbol::EMPTY_VALUE;
+        return $this->winningRow($firstRowCoordinates) ??
+                ($this->winningRow($secondRowCoordinates) ?? 
+                    ($this->winningRow($thirdRowCoordinates) ?? 
+                        Symbol::empty()
+                    )
+                );
     }
 
     private function checkIsValidFirstPlayer(Symbol $symbol): void
@@ -71,6 +70,14 @@ class Game
     private function isFirstPlay(): bool
     {
         return $this->_lastSymbol->isEmpty();
+    }
+
+    private function winningRow(Coordinates $rowCoordinates): ?Symbol
+    {
+        if ($this->_board->rowTilesHasSameSymbolsNotEmpty($rowCoordinates)) {
+            return $this->_board->symbolAt($rowCoordinates);
+        }
+        return null;
     }
 
 }

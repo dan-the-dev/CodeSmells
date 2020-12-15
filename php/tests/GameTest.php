@@ -83,7 +83,7 @@ class GameTest extends TestCase
 
         $winner = $this->game->winner();
 
-        $this->assertEquals('X', $winner);
+        $this->assertEquals(Symbol::XSymbol(), $winner);
     }
 
     /**
@@ -101,7 +101,7 @@ class GameTest extends TestCase
 
         $winner = $this->game->winner();
 
-        $this->assertEquals('O', $winner);
+        $this->assertEquals(Symbol::OSymbol(), $winner);
     }
 
     /**
@@ -118,7 +118,7 @@ class GameTest extends TestCase
 
         $winner = $this->game->winner();
 
-        $this->assertEquals('X', $winner);
+        $this->assertEquals(Symbol::XSymbol(), $winner);
     }
 
     /**
@@ -136,7 +136,7 @@ class GameTest extends TestCase
 
         $winner = $this->game->winner();
 
-        $this->assertEquals('O', $winner);
+        $this->assertEquals(Symbol::OSymbol(), $winner);
     }
 
     /**
@@ -153,7 +153,7 @@ class GameTest extends TestCase
 
         $winner = $this->game->winner();
 
-        $this->assertEquals('X', $winner);
+        $this->assertEquals(Symbol::XSymbol(), $winner);
     }
 
     /**
@@ -171,6 +171,6 @@ class GameTest extends TestCase
 
         $winner = $this->game->winner();
 
-        $this->assertEquals('O', $winner);
+        $this->assertEquals(Symbol::OSymbol(), $winner);
     }
 }
