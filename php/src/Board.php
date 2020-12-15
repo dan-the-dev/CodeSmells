@@ -2,30 +2,28 @@
 
 namespace TicTacToe;
 
+use TicTacToe\Plays;
+
 class Board
 {
-    /** @var Tile[] */
+    /** @var Plays */
     private $plays;
 
     public function __construct()
     {
+        $this->plays = new Plays();
+
         for ($i = 0; $i < 3; $i++) {
             for ($j = 0; $j < 3; $j++) {
                 $tile = new Tile(new Coordinates($i, $j), Symbol::empty());
-                $this->plays[] = $tile;
+                $this->plays->addTile($tile);
             }
         }
     }
 
-        /** @SMELL - Primitive Obsession - Should use objects */
     public function tileAt(Coordinates $coordinates): Tile
     {
-        foreach ($this->plays as $t) {
-            if ($t->coordinatesEqualsTo($coordinates)){
-                return $t;
-            }
-        }
-        return null;
+        return $this->plays->tileAt($coordinates);
     }
 
     public function addTileAt(Coordinates $coordinates, Symbol $symbols): void
