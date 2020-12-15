@@ -23,11 +23,8 @@ class Game
     /**
      * @throws Exception
      */
-    /** @SMELL - Primitive Obsession - should use classes instead of primitives */
-    public function play(string $symbol, int $x, int $y): void
+    public function play(Symbol $symbol, Coordinates $coordinates): void
     {
-        $symbol = new Symbol($symbol);
-        $coordinates = new Coordinates($x, $y);
         if ($this->_lastSymbol->isEmpty()) {
             $this->checkIsValidFirstPlayer($symbol);
         }
