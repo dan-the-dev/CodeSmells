@@ -27,15 +27,13 @@ class Game
     public function play(string $symbol, int $x, int $y): void
     {
         $symbol = new Symbol($symbol);
+        $coordinates = new Coordinates($x, $y);
         if ($this->_lastSymbol->isEmpty()) {
-            $this->checkFirstPlayer($symbol);
+            $this->checkIsValidFirstPlayer($symbol);
         }
-        $this->checkSamePlayerAsLastPlay($symbol);
-        if ($this->_board->tileAtCoordinatesIsNotEmpty(new Coordinates($x, $y))) {
-            throw new Exception("Invalid position");
-        }
-
-        $this->_board->addTileAt(new Coordinates($x, $y), $symbol);
+        $this->checkIsDiffefentPlayerFromLastPlay($symbol);
+        $this->checkCoordinatesAreNotEmpty($coordinates);
+        $this->_board->addTileAt($coordinates, $symbol);
         $this->_lastSymbol = $symbol;
     }
 
@@ -54,17 +52,24 @@ class Game
         return Symbol::EMPTY_VALUE;
     }
 
-    private function checkFirstPlayer(Symbol $symbol): void
+    private function checkIsValidFirstPlayer(Symbol $symbol): void
     {
         if ($symbol->notEqualsTo($this->_firstPlayer)) {
             throw new Exception("Invalid first player");
         }
     }
 
-    private function checkSamePlayerAsLastPlay(Symbol $symbol): void
+    private function checkIsDiffefentPlayerFromLastPlay(Symbol $symbol): void
     {
         if ($this->_lastSymbol->equalsTo($symbol)) {
             throw new Exception("Invalid next player");
+        }
+    }
+
+    private function checkCoordinatesAreNotEmpty(Coordinates $coordinates): void
+    {
+        if ($this->_board->tileAtCoordinatesIsNotEmpty($coordinates)) {
+            throw new Exception("Invalid position");
         }
     }
 
